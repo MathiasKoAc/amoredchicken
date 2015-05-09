@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private float _lastFlip = 0;
     private Rigidbody _rigidbody;
     private Animator _animator;
-
+    private AudioSource _audio;
     
     private BoxCollider _collider;
     private float _distToGround;
@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
         _distToGround = _collider.bounds.extents.y;
+        _audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -79,11 +80,14 @@ public class Player : MonoBehaviour
             if(x_rot > z_rot)
             {
                 Envoriment.FlipWorld(Vector3.right, 90 * flip * -1);
+                _audio.Play();
             }
             else
             {
                 Envoriment.FlipWorld(Vector3.forward, 90 * flip * -1);
+                _audio.Play();
             }
+            
         }
 
         if (jump != _lastJump && jump && CanJump)
@@ -105,7 +109,7 @@ public class Player : MonoBehaviour
         mousePos.x -= Screen.width / 2;
         mousePos.y -= (Screen.height / 2);
 
-        float y = mousePos.y * 0.004f * Time.deltaTime;
+        float y = mousePos.y * 0.008f * Time.deltaTime;
 
         if (Offset.y + y < 1.8 && Offset.y + y > -1)
         {
