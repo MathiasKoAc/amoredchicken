@@ -69,7 +69,20 @@ public class Player : MonoBehaviour
 
         if (CanFlip && flip != _lastFlip)
         {
-            Envoriment.FlipWorld(90 * flip);
+            var x_rot = Mathf.Abs(transform.forward.x);
+            var z_rot = Mathf.Abs(transform.forward.z);
+
+            Debug.Log(transform.forward);
+            if(x_rot > z_rot)
+            {
+                Envoriment.FlipWorld(Vector3.right, 90 * flip * -1);
+            }
+            else
+            {
+                Envoriment.FlipWorld(Vector3.forward, 90 * flip * -1);
+            }
+
+            
         }
 
         if (jump != _lastJump && jump && CanJump)

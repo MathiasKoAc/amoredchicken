@@ -33,8 +33,9 @@ public class World : MonoBehaviour {
         }
 	}
 
-    public void FlipWorld(float direction)
+    public void FlipWorld(Vector3 axis, float direction)
     {
-        _rotation.transform.RotateAround(_currentPlayer.transform.position, Vector3.forward, direction);
+        Debug.Log(axis);
+        _rotation.transform.RotateAround(_currentPlayer.transform.position, axis, direction);
     }
 }
