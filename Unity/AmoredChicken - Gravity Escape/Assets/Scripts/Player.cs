@@ -12,10 +12,13 @@ public class Player : MonoBehaviour
     public World Envoriment;
 
     private bool _lastJump = false;
-
     private float _lastFlip = 0;
-
     private Rigidbody _rigidbody;
+    private Animator _animator;
+
+    private BoxCollider _collider;
+    private float _distToGround;
+    private bool _lastCanJump = true;
 
     private bool CanFlip
     {
@@ -29,30 +32,38 @@ public class Player : MonoBehaviour
     {
         get
         {
-            return true;
+            return Physics.Raycast(transform.position, -Vector3.up, 0.2f); ;
         }
     }
 
     void Start()
     {
-        
+        _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
+        _collider = GetComponent<BoxCollider>();
+        _distToGround = _collider.bounds.extents.y;
     }
 
     void Update()
     {
         UpdatePosition();
-        //UpdateRotation();
+        UpdateRotation();
+
+        //Debug.Log(CanJump);
+
+        //if(_lastCanJump != CanJump)
+        //{
+        //    _animator.SetBool("Jumping", CanJump);
+        //}
+
+        _lastCanJump = CanJump;
     }
 
     private void UpdatePosition()
     {
-        //transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
-
         var z = Input.GetAxisRaw("Vertical") * Speed;
         var x = Input.GetAxisRaw("Horizontal") * Speed;
         var flip = Input.GetAxisRaw("Flip");
-
 
         var jump = Input.GetButton("Jump");
 
@@ -80,11 +91,9 @@ public class Player : MonoBehaviour
         mousePos.x -= Screen.width / 2;
         mousePos.y -= Screen.height / 2;
 
-
-
+        transform.Rotate(0, mousePos.x * Time.deltaTime, 0);
+        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
         
-        transform.Rotate(0, mousePos.y * Time.deltaTime, 0);
-        Debug.Log(mousePos.y);
     }
 }
 

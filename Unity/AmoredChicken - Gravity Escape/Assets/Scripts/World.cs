@@ -8,6 +8,7 @@ public class World : MonoBehaviour {
 
     private Player _currentPlayer;
 
+    
     private Transform _start;
     private ThirdPersonCamera _camera;
     private GameObject _rotation;
@@ -18,6 +19,8 @@ public class World : MonoBehaviour {
 
         _camera.Offset = _start.transform.position - _camera.transform.position;
         _rotation = GameObject.FindGameObjectWithTag("Rotation");
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 	
 	// Update is called once per frame
