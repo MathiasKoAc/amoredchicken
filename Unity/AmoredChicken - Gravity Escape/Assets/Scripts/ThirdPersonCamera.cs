@@ -26,9 +26,6 @@ public class ThirdPersonCamera : MonoBehaviour {
 
             transform.position = LookAt.position - (rotation * Offset);
             transform.LookAt(LookAt.position + LookAtOffset);
-
-            Debug.Log(LookAt.position);
-            Debug.Log(Offset);
         }
     }
 }
