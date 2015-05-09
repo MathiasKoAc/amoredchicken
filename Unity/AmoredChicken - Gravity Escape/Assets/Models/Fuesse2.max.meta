@@ -1,0 +1,124 @@
+fileFormatVersion: 2
+guid: d04a73ca8047b9e4188d87b7e5c36d4f
+timeCreated: 1431180389
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Kralle_L
+    100004: Kralle_M
+    100006: Kralle_R
+    100008: Kugel001
+    100010: Zylinder001
+    100012: Zylinder002
+    100014: Zylinder003
+    100016: Zylinder008
+    100018: Zylinder009
+    100020: Zylinder010
+    100022: Zylinder011
+    100024: Zylinder012
+    100026: Zylinder013
+    400000: //RootNode
+    400002: Kralle_L
+    400004: Kralle_M
+    400006: Kralle_R
+    400008: Kugel001
+    400010: Zylinder001
+    400012: Zylinder002
+    400014: Zylinder003
+    400016: Zylinder008
+    400018: Zylinder009
+    400020: Zylinder010
+    400022: Zylinder011
+    400024: Zylinder012
+    400026: Zylinder013
+    2300000: Kugel001
+    2300002: Zylinder001
+    2300004: Zylinder002
+    2300006: Zylinder003
+    2300008: Zylinder008
+    2300010: Zylinder009
+    2300012: Zylinder010
+    2300014: Zylinder011
+    2300016: Zylinder012
+    2300018: Zylinder013
+    3300000: Kugel001
+    3300002: Zylinder001
+    3300004: Zylinder002
+    3300006: Zylinder003
+    3300008: Zylinder008
+    3300010: Zylinder009
+    3300012: Zylinder010
+    3300014: Zylinder011
+    3300016: Zylinder012
+    3300018: Zylinder013
+    4300000: Zylinder001
+    4300002: Zylinder002
+    4300004: Zylinder003
+    4300006: Kugel001
+    4300008: Zylinder012
+    4300010: Zylinder013
+    4300012: Zylinder010
+    4300014: Zylinder011
+    4300016: Zylinder008
+    4300018: Zylinder009
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
