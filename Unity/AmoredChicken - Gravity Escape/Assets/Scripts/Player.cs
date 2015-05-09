@@ -11,11 +11,15 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public World Envoriment;
 
+    [HideInInspector]
+    public Vector3 Offset = new Vector3(0, 0, 0);
+
     private bool _lastJump = false;
     private float _lastFlip = 0;
     private Rigidbody _rigidbody;
     private Animator _animator;
 
+    
     private BoxCollider _collider;
     private float _distToGround;
     private bool _lastCanJump = true;
@@ -72,7 +76,6 @@ public class Player : MonoBehaviour
             var x_rot = Mathf.Abs(transform.forward.x);
             var z_rot = Mathf.Abs(transform.forward.z);
 
-            Debug.Log(transform.forward);
             if(x_rot > z_rot)
             {
                 Envoriment.FlipWorld(Vector3.right, 90 * flip * -1);
@@ -81,8 +84,6 @@ public class Player : MonoBehaviour
             {
                 Envoriment.FlipWorld(Vector3.forward, 90 * flip * -1);
             }
-
-            
         }
 
         if (jump != _lastJump && jump && CanJump)
@@ -102,9 +103,16 @@ public class Player : MonoBehaviour
         var mousePos = Input.mousePosition;
 
         mousePos.x -= Screen.width / 2;
-        mousePos.y -= Screen.height / 2;
+        mousePos.y -= (Screen.height / 2);
 
-        transform.Rotate(0, mousePos.x * Time.deltaTime, 0);
+        float y = mousePos.y * 0.004f * Time.deltaTime;
+
+        if (Offset.y + y < 1.8 && Offset.y + y > -1)
+        {
+            Offset.y += y;
+        }
+
+        transform.Rotate(mousePos.y * Time.deltaTime, mousePos.x * Time.deltaTime, 0);
         transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
         
     }

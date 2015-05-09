@@ -6,7 +6,10 @@ public class ThirdPersonCamera : MonoBehaviour {
     /// <summary>
     /// Transform to look at
     /// </summary>
-    public Transform LookAt;
+    public Player LookAt;
+
+    public static float MaxTop = 10f;
+    public static float MaxBot = 10f;
 
     /// <summary>
     /// Offset to the Object
@@ -21,11 +24,11 @@ public class ThirdPersonCamera : MonoBehaviour {
 	void Update () {
         if (LookAt != null)
         {
-            float desiredAngle = LookAt.eulerAngles.y;
+            float desiredAngle = LookAt.transform.eulerAngles.y;
             Quaternion rotation = Quaternion.Euler(0, desiredAngle, 0);
 
-            transform.position = LookAt.position - (rotation * Offset);
-            transform.LookAt(LookAt.position + LookAtOffset);
+            transform.position = LookAt.transform.position - (rotation * Offset);
+            transform.LookAt(LookAt.transform.position + LookAtOffset + LookAt.Offset);
         }
     }
 }

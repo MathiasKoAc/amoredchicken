@@ -28,7 +28,7 @@ public class World : MonoBehaviour {
 	    if(_currentPlayer == null)
         {
             _currentPlayer = ((GameObject) Instantiate(Player.gameObject, _start.position, Quaternion.identity)).GetComponent<Player>();
-            _camera.LookAt = _currentPlayer.transform;
+            _camera.LookAt = _currentPlayer;
             _currentPlayer.Envoriment = this;
         }
 	}
