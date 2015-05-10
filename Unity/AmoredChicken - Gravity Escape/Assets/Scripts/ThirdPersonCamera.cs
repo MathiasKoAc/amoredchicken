@@ -16,10 +16,6 @@ public class ThirdPersonCamera : MonoBehaviour {
     /// </summary>
     public Vector3 Offset;
     public Vector3 LookAtOffset;
-
-    void Start () {
-        
-    }
 	
 	void Update () {
         if (LookAt != null)

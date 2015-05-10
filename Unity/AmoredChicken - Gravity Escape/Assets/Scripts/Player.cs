@@ -87,7 +87,6 @@ public class Player : MonoBehaviour
                 Envoriment.FlipWorld(Vector3.forward, 90 * flip * -1);
                 _audio.Play();
             }
-            
         }
 
         if (jump != _lastJump && jump && CanJump)
