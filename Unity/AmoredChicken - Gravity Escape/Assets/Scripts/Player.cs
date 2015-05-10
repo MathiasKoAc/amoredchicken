@@ -64,13 +64,18 @@ public class Player : MonoBehaviour
         _lastCanJump = CanJump;
     }
 
+
     private void UpdatePosition()
     {
         var z = Input.GetAxisRaw("Vertical") * Speed;
         var x = Input.GetAxisRaw("Horizontal") * Speed;
         var flip = Input.GetAxisRaw("Flip");
 
+		//Debug.Log ("z" + z);
+
         var jump = Input.GetButton("Jump");
+		_animator.SetBool("isJumping", jump);
+		_animator.SetBool("isRunning", (z*z > 0.9) || (x*x > 0.9));
 
         if (CanFlip && flip != _lastFlip)
         {
