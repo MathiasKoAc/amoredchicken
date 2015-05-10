@@ -68,6 +68,7 @@ public class World : MonoBehaviour {
     {
         _currentPlayer = _currentPlayer = ((GameObject)Instantiate(Player.gameObject, _start.position, Quaternion.identity)).GetComponent<Player>();
         _camera.LookAt = _currentPlayer;
+        _rotation.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         _currentPlayer.Envoriment = this;
     }
 }
