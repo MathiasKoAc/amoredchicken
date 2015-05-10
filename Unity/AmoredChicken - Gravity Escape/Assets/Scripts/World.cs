@@ -8,7 +8,6 @@ public class World : MonoBehaviour {
 
     private Player _currentPlayer;
 
-    
     private Transform _start;
     private ThirdPersonCamera _camera;
     private GameObject _rotation;
@@ -27,9 +26,7 @@ public class World : MonoBehaviour {
 	void Update () {
 	    if(_currentPlayer == null)
         {
-            _currentPlayer = ((GameObject) Instantiate(Player.gameObject, _start.position, Quaternion.identity)).GetComponent<Player>();
-            _camera.LookAt = _currentPlayer;
-            _currentPlayer.Envoriment = this;
+            Spawn();
         }
 	}
 
@@ -37,5 +34,18 @@ public class World : MonoBehaviour {
     {
         Debug.Log(axis);
         _rotation.transform.RotateAround(_currentPlayer.transform.position, axis, direction);
+    }
+
+    public void RespawnPlayer()
+    {
+        Destroy(_currentPlayer.gameObject);
+        Spawn();
+    }
+
+    private void Spawn()
+    {
+        _currentPlayer = _currentPlayer = ((GameObject)Instantiate(Player.gameObject, _start.position, Quaternion.identity)).GetComponent<Player>();
+        _camera.LookAt = _currentPlayer;
+        _currentPlayer.Envoriment = this;
     }
 }

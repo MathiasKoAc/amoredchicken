@@ -16,7 +16,13 @@ public class ThirdPersonCamera : MonoBehaviour {
     /// </summary>
     public Vector3 Offset;
     public Vector3 LookAtOffset;
+    private Vector3 _StartPosition;
 	
+    void Start()
+    {
+        _StartPosition = transform.position;
+    }
+
 	void Update () {
         if (LookAt != null)
         {
@@ -26,5 +32,10 @@ public class ThirdPersonCamera : MonoBehaviour {
             transform.position = LookAt.transform.position - (rotation * Offset);
             transform.LookAt(LookAt.transform.position + LookAtOffset + LookAt.Offset);
         }
+    }
+
+    public void Reset()
+    {
+        this.transform.position = _StartPosition;
     }
 }
