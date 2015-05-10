@@ -21,4 +21,9 @@ public class Menu : MonoBehaviour {
                  Application.Quit();
         #endif
     }
+
+	public void ButtonMenu()
+	{
+		Application.LoadLevel("Menu");
+	}
 }
