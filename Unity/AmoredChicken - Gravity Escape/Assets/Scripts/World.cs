@@ -5,6 +5,7 @@ public class World : MonoBehaviour {
 
     public ThirdPersonCamera Camera;
     public GameObject Player;
+    
 
     private Player _currentPlayer;
 

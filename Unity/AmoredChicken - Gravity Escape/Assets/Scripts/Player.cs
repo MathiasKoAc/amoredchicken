@@ -84,12 +84,12 @@ public class Player : MonoBehaviour
 
             if(x_rot > z_rot)
             {
-                Envoriment.FlipWorld(Vector3.right, 90 * flip * -1 );
+                Envoriment.FlipWorld(Vector3.right, 90 * flip * -1 * Mathf.Sign(transform.forward.x));
                 _audio.Play();
             }
             else
             {
-                Envoriment.FlipWorld(Vector3.forward, 90 * flip * -1 );
+                Envoriment.FlipWorld(Vector3.forward, 90 * flip * -1 * Mathf.Sign(transform.forward.z));
                 _audio.Play();
             }
         }
