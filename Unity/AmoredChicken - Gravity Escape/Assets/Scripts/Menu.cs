@@ -26,4 +26,9 @@ public class Menu : MonoBehaviour {
 	{
 		Application.LoadLevel("Menu");
 	}
+
+    public void ButtonCredits()
+    {
+        Application.LoadLevel("Credits");
+    }
 }

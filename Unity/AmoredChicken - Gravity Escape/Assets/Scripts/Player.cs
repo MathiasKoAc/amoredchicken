@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     private AudioSource _audio;
     
     private BoxCollider _collider;
-    private float _distToGround;
     private bool _lastCanJump = true;
 
     private bool CanFlip
@@ -45,7 +44,6 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
-        _distToGround = _collider.bounds.extents.y;
         _audio = GetComponent<AudioSource>();
     }
 
@@ -108,21 +106,21 @@ public class Player : MonoBehaviour
 
     private void UpdateRotation()
     {
-        var mousePos = Input.mousePosition;
 
-        mousePos.x -= Screen.width / 2;
-        mousePos.y -= (Screen.height / 2);
+        var x = Input.GetAxis("Mouse X") * 2.5f * Time.deltaTime;
 
-        float y = mousePos.y * 0.008f * Time.deltaTime;
+        var r = transform.rotation;
+        r.eulerAngles = new Vector3(0, r.eulerAngles.y + (x * 25), 0);
+
+        transform.rotation = r;
+
+        var y = Input.GetAxis("Mouse Y") * 2.5f * Time.deltaTime;
 
         if (Offset.y + y < 1.8 && Offset.y + y > -1)
         {
             Offset.y += y;
         }
 
-        transform.Rotate(mousePos.y * Time.deltaTime, mousePos.x * Time.deltaTime, 0);
-        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
-        
     }
 }
 
