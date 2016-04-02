@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
     private void UpdateRotation()
     {
 
-        var x = Input.GetAxis("Mouse X") * 2.5f * Time.deltaTime;
+        var x = Input.GetAxis("Mouse X") * 3.5f * Time.deltaTime;
 
         var r = transform.rotation;
         r.eulerAngles = new Vector3(0, r.eulerAngles.y + (x * 25), 0);
