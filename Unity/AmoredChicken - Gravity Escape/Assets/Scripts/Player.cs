@@ -8,6 +8,12 @@ public class Player : MonoBehaviour
 
     public float JumpingPower;
 
+    public float CameraMaxUp = 3f;
+    public float CameraMaxDown = 1f;
+
+    public float MouseSpeedVertical = 2.5f;
+    public float MouseSpeedHorizontal = 3.5f;
+
     [HideInInspector]
     public World Envoriment;
 
@@ -52,13 +58,6 @@ public class Player : MonoBehaviour
         UpdatePosition();
         UpdateRotation();
 
-        //Debug.Log(CanJump);
-
-        //if(_lastCanJump != CanJump)
-        //{
-        //    _animator.SetBool("Jumping", CanJump);
-        //}
-
         _lastCanJump = CanJump;
     }
 
@@ -68,8 +67,6 @@ public class Player : MonoBehaviour
         var z = Input.GetAxisRaw("Vertical") * Speed;
         var x = Input.GetAxisRaw("Horizontal") * Speed;
         var flip = Input.GetAxisRaw("Flip");
-
-		//Debug.Log ("z" + z);
 
         var jump = Input.GetButton("Jump");
 		_animator.SetBool("isJumping", jump);
@@ -107,16 +104,15 @@ public class Player : MonoBehaviour
     private void UpdateRotation()
     {
 
-        var x = Input.GetAxis("Mouse X") * 3.5f * Time.deltaTime;
+        var x = Input.GetAxis("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
+        var y = Input.GetAxis("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;
 
         var r = transform.rotation;
         r.eulerAngles = new Vector3(0, r.eulerAngles.y + (x * 25), 0);
 
         transform.rotation = r;
 
-        var y = Input.GetAxis("Mouse Y") * 2.5f * Time.deltaTime;
-
-        if (Offset.y + y < 1.8 && Offset.y + y > -1)
+        if (Offset.y + y < this.CameraMaxUp && Offset.y + y > this.CameraMaxDown)
         {
             Offset.y += y;
         }
