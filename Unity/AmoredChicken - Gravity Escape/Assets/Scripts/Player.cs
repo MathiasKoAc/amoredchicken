@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
+
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
@@ -55,21 +58,43 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        goToMenu();
         UpdatePosition();
         UpdateRotation();
 
         _lastCanJump = CanJump;
     }
 
+    private void goToMenu()
+    {
+        if(CrossPlatformInputManager.GetButton("Menu"))
+        {
+            Application.LoadLevel("Menu");
+        }
+    }
+
 
     private void UpdatePosition()
     {
-        var z = Input.GetAxisRaw("Vertical") * Speed;
-        var x = Input.GetAxisRaw("Horizontal") * Speed;
+
+        var z = CrossPlatformInputManager.GetAxis("Vertical") * Speed; //Input.GetAxisRaw("Vertical") * Speed;
+        var x = CrossPlatformInputManager.GetAxis("Horizontal") * Speed;  //Input.GetAxisRaw("Horizontal") * Speed;
         var flip = Input.GetAxisRaw("Flip");
 
-        var jump = Input.GetButton("Jump");
-		_animator.SetBool("isJumping", jump);
+        var flippR = CrossPlatformInputManager.GetButton("FlippR");
+        var flippL = CrossPlatformInputManager.GetButton("FlippL");
+
+        if(flippR)
+        {
+            flip = 1;
+        } else if(flippL)
+        {
+            flip = -1;
+
+        }
+
+        var jump = CrossPlatformInputManager.GetButton("Jump"); //Input.GetButton("Jump");
+        _animator.SetBool("isJumping", jump);
 		_animator.SetBool("isRunning", (z*z > 0.9) || (x*x > 0.9));
 
         if (CanFlip && flip != _lastFlip)
@@ -103,9 +128,11 @@ public class Player : MonoBehaviour
 
     private void UpdateRotation()
     {
+        var x = CrossPlatformInputManager.GetAxis("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
+        var y = CrossPlatformInputManager.GetAxis("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;
 
-        var x = Input.GetAxis("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
-        var y = Input.GetAxis("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;
+        //var x = Input.GetAxis("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
+        //var y = Input.GetAxis("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;
 
         var r = transform.rotation;
         r.eulerAngles = new Vector3(0, r.eulerAngles.y + (x * 25), 0);
