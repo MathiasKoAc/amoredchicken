@@ -76,9 +76,19 @@ public class Player : MonoBehaviour
 
     private void UpdatePosition()
     {
+        float x = 0f;
+        float z = 0f;
 
-        var z = CrossPlatformInputManager.GetAxis("Vertical") * Speed; //Input.GetAxisRaw("Vertical") * Speed;
-        var x = CrossPlatformInputManager.GetAxis("Horizontal") * Speed;  //Input.GetAxisRaw("Horizontal") * Speed;
+        if (Application.isMobilePlatform)
+        {
+            z = CrossPlatformInputManager.GetAxis("Vertical") * Speed;
+            x = CrossPlatformInputManager.GetAxis("Horizontal") * Speed;
+        } else
+        {
+            z = Input.GetAxisRaw("Vertical") * Speed;
+            x = Input.GetAxisRaw("Horizontal") * Speed;
+        }
+            
         var flip = Input.GetAxisRaw("Flip");
 
         var flippR = CrossPlatformInputManager.GetButton("FlippR");
@@ -128,8 +138,9 @@ public class Player : MonoBehaviour
 
     private void UpdateRotation()
     {
-        var x = CrossPlatformInputManager.GetAxis("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
-        var y = CrossPlatformInputManager.GetAxis("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;
+
+        var x = CrossPlatformInputManager.GetAxisRaw("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
+        var y = CrossPlatformInputManager.GetAxisRaw("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;        
 
         //var x = Input.GetAxis("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
         //var y = Input.GetAxis("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;
