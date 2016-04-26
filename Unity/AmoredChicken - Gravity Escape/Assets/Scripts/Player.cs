@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public float Speed;
+    public float SideSpeed;
 
     public float JumpingPower;
 
@@ -82,11 +83,11 @@ public class Player : MonoBehaviour
         if (Application.isMobilePlatform)
         {
             z = CrossPlatformInputManager.GetAxis("Vertical") * Speed;
-            x = CrossPlatformInputManager.GetAxis("Horizontal") * Speed;
+            x = CrossPlatformInputManager.GetAxis("Horizontal") * SideSpeed;
         } else
         {
             z = Input.GetAxisRaw("Vertical") * Speed;
-            x = Input.GetAxisRaw("Horizontal") * Speed;
+            x = Input.GetAxisRaw("Horizontal") * SideSpeed;
         }
             
         var flip = Input.GetAxisRaw("Flip");
