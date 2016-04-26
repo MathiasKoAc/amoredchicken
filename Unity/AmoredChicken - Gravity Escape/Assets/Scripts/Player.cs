@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
     {
         if(CrossPlatformInputManager.GetButton("Menu"))
         {
+            CrossPlatformInputManager.SetButtonUp("Menu");
             SceneManager.LoadScene("Menu");
         }
     }

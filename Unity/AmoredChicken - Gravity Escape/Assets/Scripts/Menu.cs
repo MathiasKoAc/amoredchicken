@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
 
@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour {
 
     public void ButtonStart()
     {
-        Application.LoadLevel("Tutorial");
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void ButtonClose()
@@ -24,11 +24,41 @@ public class Menu : MonoBehaviour {
 
 	public void ButtonMenu()
 	{
-		Application.LoadLevel("Menu");
-	}
+        SceneManager.LoadScene("Menu");
+    }
 
     public void ButtonCredits()
     {
-        Application.LoadLevel("Credits");
+        SceneManager.LoadScene("Credits");
+    }
+
+    public void ButtonSelectLevel()
+    {
+        SceneManager.LoadScene("SelectLevel");
+    }
+
+    public void ButtonLevel1()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
+    public void ButtonLevel2()
+    {
+        SceneManager.LoadScene("Level02");
+    }
+
+    public void ButtonLevel3()
+    {
+        SceneManager.LoadScene("Level03");
+    }
+
+    public void ButtonLevel4()
+    {
+        SceneManager.LoadScene("Level04");
+    }
+
+    public void ButtonLevel5()
+    {
+        SceneManager.LoadScene("Level05");
     }
 }

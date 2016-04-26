@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class World : MonoBehaviour {
 
@@ -29,7 +30,7 @@ public class World : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Confined;
         _text = GameObject.FindGameObjectWithTag("Counter").GetComponent<Text>();
 
-        _lastTime = PlayerPrefs.GetInt(Application.loadedLevelName + "_time", -1);
+        _lastTime = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_time", -1);
 
         _running = true;
         StartCoroutine(TimerFunction());
