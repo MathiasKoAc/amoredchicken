@@ -30,8 +30,6 @@ public class Player : MonoBehaviour
     private Animator _animator;
     private AudioSource _audio;
     
-    private BoxCollider _collider;
-    private bool _lastCanJump = true;
 
     private bool CanFlip
     {
@@ -53,7 +51,6 @@ public class Player : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<BoxCollider>();
         _audio = GetComponent<AudioSource>();
     }
 
@@ -62,15 +59,13 @@ public class Player : MonoBehaviour
         goToMenu();
         UpdatePosition();
         UpdateRotation();
-
-        _lastCanJump = CanJump;
     }
 
     private void goToMenu()
     {
         if(CrossPlatformInputManager.GetButton("Menu"))
         {
-            Application.LoadLevel("Menu");
+            SceneManager.LoadScene("Menu");
         }
     }
 
@@ -142,9 +137,6 @@ public class Player : MonoBehaviour
 
         var x = CrossPlatformInputManager.GetAxisRaw("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
         var y = CrossPlatformInputManager.GetAxisRaw("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;        
-
-        //var x = Input.GetAxis("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
-        //var y = Input.GetAxis("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;
 
         var r = transform.rotation;
         r.eulerAngles = new Vector3(0, r.eulerAngles.y + (x * 25), 0);

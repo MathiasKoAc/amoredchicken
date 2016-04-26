@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Finish : MonoBehaviour {
 
@@ -19,11 +19,11 @@ public class Finish : MonoBehaviour {
 
     void OnTriggerEnter()
     {
-        int last = PlayerPrefs.GetInt(Application.loadedLevelName + "_time", -1);
+        int last = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_time", -1);
         if (last == -1 || last > _manager.CurrentTime) {
-            PlayerPrefs.SetInt(Application.loadedLevelName + "_time", _manager.CurrentTime);
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_time", _manager.CurrentTime);
         }
-       
-        Application.LoadLevel(NextScene);
+
+        SceneManager.LoadScene(NextScene);
     }
 }
