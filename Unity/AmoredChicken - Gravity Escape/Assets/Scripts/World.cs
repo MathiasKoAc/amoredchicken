@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class World : MonoBehaviour {
 
     public ThirdPersonCamera Camera;
+    public GameObject DeathImage;
     public GameObject Player;
 
     public int CurrentTime;
@@ -33,6 +34,7 @@ public class World : MonoBehaviour {
         _lastTime = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_time", -1);
 
         _running = true;
+        DeathImage.SetActive(false);
         StartCoroutine(TimerFunction());
     }
 	
@@ -46,8 +48,17 @@ public class World : MonoBehaviour {
         }
     }
 
-	// Update is called once per frame
-	void Update () {
+    private IEnumerator resetDeathImage()
+    {
+        while (_running)
+        {
+            yield return new WaitForSeconds(1);
+            DeathImage.SetActive(false);
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 	    if(_currentPlayer == null)
         {
             Spawn();
@@ -61,6 +72,8 @@ public class World : MonoBehaviour {
 
     public void RespawnPlayer()
     {
+        DeathImage.SetActive(true);
+        StartCoroutine(resetDeathImage());
         Destroy(_currentPlayer.gameObject);
         Spawn();
     }
