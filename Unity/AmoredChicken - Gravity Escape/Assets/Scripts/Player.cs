@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
+    public GameObject Explosion;
+
     public float Speed;
     public float SideSpeed;
 
@@ -24,11 +26,13 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public Vector3 Offset = new Vector3(0, 0, 0);
 
+
     private bool _lastJump = false;
     private float _lastFlip = 0;
     private Rigidbody _rigidbody;
     private Animator _animator;
     private AudioSource _audio;
+    private GameObject _explosion;
     
 
     private bool CanFlip
@@ -61,6 +65,11 @@ public class Player : MonoBehaviour
         UpdateRotation();
     }
 
+    public void Explode()
+    {
+        Destroy(this.gameObject, 1f);
+    }
+
     private void goToMenu()
     {
         if(CrossPlatformInputManager.GetButton("Menu"))
@@ -68,8 +77,19 @@ public class Player : MonoBehaviour
             CrossPlatformInputManager.SetButtonUp("Menu");
             SceneManager.LoadScene("Menu");
         }
-    }
 
+        if (CrossPlatformInputManager.GetButton("Retry"))
+        {
+            CrossPlatformInputManager.SetButtonUp("Retry");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (CrossPlatformInputManager.GetButton("Retry"))
+        {
+            CrossPlatformInputManager.SetButtonUp("Retry");
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>().enabled = !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>().enabled;
+        }
+    }
 
     private void UpdatePosition()
     {
@@ -85,8 +105,8 @@ public class Player : MonoBehaviour
             z = Input.GetAxisRaw("Vertical") * Speed;
             x = Input.GetAxisRaw("Horizontal") * SideSpeed;
         }
-            
-        var flip = Input.GetAxisRaw("Flip");
+
+        float flip = 0;// = Input.GetAxisRaw("Flip");
 
         var flippR = CrossPlatformInputManager.GetButton("FlippR");
         var flippL = CrossPlatformInputManager.GetButton("FlippL");

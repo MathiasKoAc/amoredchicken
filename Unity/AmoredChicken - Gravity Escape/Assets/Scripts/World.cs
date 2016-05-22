@@ -50,9 +50,9 @@ public class World : MonoBehaviour {
 
     private IEnumerator resetDeathImage()
     {
-        while (_running)
+        while (DeathImage.activeSelf)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             DeathImage.SetActive(false);
         }
     }
@@ -74,13 +74,17 @@ public class World : MonoBehaviour {
     {
         DeathImage.SetActive(true);
         StartCoroutine(resetDeathImage());
-        Destroy(_currentPlayer.gameObject);
         Spawn();
     }
 
     private void Spawn()
     {
-        _currentPlayer = _currentPlayer = ((GameObject)Instantiate(Player.gameObject, _start.position, Quaternion.identity)).GetComponent<Player>();
+
+        if(_currentPlayer != null)
+        {
+            _currentPlayer.Explode();
+        }
+        _currentPlayer = ((GameObject)Instantiate(Player.gameObject, _start.position, Quaternion.identity)).GetComponent<Player>();
         _camera.LookAt = _currentPlayer;
         _rotation.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         _currentPlayer.Envoriment = this;
