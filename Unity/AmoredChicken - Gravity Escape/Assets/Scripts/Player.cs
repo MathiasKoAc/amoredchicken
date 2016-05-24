@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
 
     public void Explode()
     {
-        Destroy(this.gameObject, 1f);
+        Destroy(this.gameObject, 0.1f);
     }
 
     private void goToMenu()
@@ -84,9 +84,9 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        if (CrossPlatformInputManager.GetButton("Retry"))
+        if (CrossPlatformInputManager.GetButton("Mute"))
         {
-            CrossPlatformInputManager.SetButtonUp("Retry");
+            CrossPlatformInputManager.SetButtonUp("Mute");
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>().enabled = !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>().enabled;
         }
     }

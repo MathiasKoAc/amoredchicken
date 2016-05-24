@@ -22,7 +22,20 @@ public class Menu : MonoBehaviour {
         #endif
     }
 
-	public void ButtonMenu()
+    public void ButtonMute()
+    {
+        AudioListener aListener = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
+        aListener.enabled = !aListener.enabled;
+        if (aListener.enabled)
+        {
+            GetComponent<AudioSource>().Play();
+        }
+        else {
+            GetComponent<AudioSource>().Stop();
+        }
+    }
+
+    public void ButtonMenu()
 	{
         SceneManager.LoadScene("Menu");
     }

@@ -17,13 +17,18 @@ public class Finish : MonoBehaviour {
 	    
 	}
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider col)
     {
-        int last = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_time", -1);
-        if (last == -1 || last > _manager.CurrentTime) {
-            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_time", _manager.CurrentTime);
-        }
+        if(col.tag == "Player")
+        {
+            int last = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_time", -1);
+            if (last == -1 || last > _manager.CurrentTime)
+            {
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_time", _manager.CurrentTime);
+            }
 
-        SceneManager.LoadScene(NextScene);
+            SceneManager.LoadScene(NextScene);
+        }
+        
     }
 }

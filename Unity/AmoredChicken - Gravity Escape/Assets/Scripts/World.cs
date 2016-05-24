@@ -20,6 +20,7 @@ public class World : MonoBehaviour {
     private ThirdPersonCamera _camera;
     private GameObject _rotation;
     private bool _running;
+    private bool _respawning = false;
 
     void Start () {
         _start = GameObject.FindGameObjectWithTag("Spawn").transform;
@@ -59,7 +60,7 @@ public class World : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-	    if(_currentPlayer == null)
+	    if (!_respawning && _currentPlayer == null)
         {
             Spawn();
         }
@@ -79,14 +80,16 @@ public class World : MonoBehaviour {
 
     private void Spawn()
     {
-
-        if(_currentPlayer != null)
+        _respawning = true;
+        _rotation.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        if (_currentPlayer != null)
         {
             _currentPlayer.Explode();
         }
         _currentPlayer = ((GameObject)Instantiate(Player.gameObject, _start.position, Quaternion.identity)).GetComponent<Player>();
         _camera.LookAt = _currentPlayer;
-        _rotation.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         _currentPlayer.Envoriment = this;
+
+        _respawning = false;
     }
 }
