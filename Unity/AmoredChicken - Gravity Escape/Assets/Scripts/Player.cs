@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        AudioListener.pause = (PlayerPrefs.GetInt("Mute", 0) == 1 ? true : false);
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _audio = GetComponent<AudioSource>();
@@ -87,7 +88,8 @@ public class Player : MonoBehaviour
         if (CrossPlatformInputManager.GetButton("Mute"))
         {
             CrossPlatformInputManager.SetButtonUp("Mute");
-            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>().enabled = !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>().enabled;
+            AudioListener.pause = !AudioListener.pause;
+            PlayerPrefs.SetInt("Mute", AudioListener.pause ? 1 : 0);
         }
     }
 

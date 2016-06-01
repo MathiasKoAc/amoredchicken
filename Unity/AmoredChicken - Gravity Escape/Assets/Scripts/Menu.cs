@@ -5,6 +5,7 @@ public class Menu : MonoBehaviour {
 
     void Start()
     {
+        AudioListener.pause = (PlayerPrefs.GetInt("Mute", 0) == 1 ? true : false);
         GetComponent<AudioSource>().Play();
     }
 
@@ -24,15 +25,8 @@ public class Menu : MonoBehaviour {
 
     public void ButtonMute()
     {
-        AudioListener aListener = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
-        aListener.enabled = !aListener.enabled;
-        if (aListener.enabled)
-        {
-            GetComponent<AudioSource>().Play();
-        }
-        else {
-            GetComponent<AudioSource>().Stop();
-        }
+        AudioListener.pause = !AudioListener.pause;
+        PlayerPrefs.SetInt("Mute", AudioListener.pause ? 1 : 0);
     }
 
     public void ButtonMenu()
