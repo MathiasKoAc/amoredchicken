@@ -107,6 +107,8 @@ public class Player : MonoBehaviour
             z = Input.GetAxisRaw("Vertical") * Speed;
             x = Input.GetAxisRaw("Horizontal") * SideSpeed;
         }
+        x = x*x < 0.1 ? CrossPlatformInputManager.GetAxisRaw("JoyMoveH") * SideSpeed : x;
+        z = z*z < 0.1 ? CrossPlatformInputManager.GetAxisRaw("JoyMoveV") * Speed : z;
 
         float flip = 0;// = Input.GetAxisRaw("Flip");
 
@@ -158,8 +160,14 @@ public class Player : MonoBehaviour
     private void UpdateRotation()
     {
 
-        var x = CrossPlatformInputManager.GetAxisRaw("Mouse X") * this.MouseSpeedHorizontal * Time.deltaTime;
-        var y = CrossPlatformInputManager.GetAxisRaw("Mouse Y") * this.MouseSpeedVertical * Time.deltaTime;        
+        var x = CrossPlatformInputManager.GetAxisRaw("Mouse X");
+        var y = CrossPlatformInputManager.GetAxisRaw("Mouse Y");
+
+        x = x * x < 0.01 ? CrossPlatformInputManager.GetAxisRaw("JoyLookH") : x;
+        y = y * y < 0.01 ? CrossPlatformInputManager.GetAxisRaw("JoyLookV") : y;
+
+        x *= this.MouseSpeedHorizontal * Time.deltaTime;
+        y *= this.MouseSpeedVertical * Time.deltaTime;
 
         var r = transform.rotation;
         r.eulerAngles = new Vector3(0, r.eulerAngles.y + (x * 25), 0);
