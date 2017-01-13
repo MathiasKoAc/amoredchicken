@@ -46,6 +46,11 @@ public class Menu : MonoBehaviour {
 
     public void ButtonLevel1()
     {
+        SceneManager.LoadScene("Level01");
+    }
+
+    public void ButtonLevelT1()
+    {
         SceneManager.LoadScene("Tutorial");
     }
 
